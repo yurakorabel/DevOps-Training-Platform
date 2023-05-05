@@ -2,16 +2,9 @@
 body {
     font-family: 'Helvetica Neue', sans-serif;
     color: #444;
-    /*background-color: #f5f5f5;*/
-
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
-    /*background-image: url("https://cdn.leonardo.ai/users/752743f8-2a91-4719-a0e5-faf0947cb534/generations/6e34d03a-a53d-4905-9ade-97fffc1aa8ea/Leonardo_Creative_gray_background_0.jpg");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: 100% 100%;*/
-
     background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/embossed-diamond.png");
 }
 
@@ -34,7 +27,6 @@ main {
 footer {
     margin-top: auto;
 }
-/*===================*/
 
 /*======Navbar=======*/
 nav .navbar-brand {
@@ -79,7 +71,7 @@ nav .btn-outline-secondary:hover {
 
 
 @media (max-width: 991.98px) {
-    .navbar-collapse {
+    nav .navbar-collapse {
         left: 0;
         width: 100%;
         background-color: #fff;
@@ -97,7 +89,7 @@ nav .btn-outline-secondary:hover {
         padding-left: 2%;
     }
 
-    .navbar-collapse .dropdown-menu {
+    nav .navbar-collapse .dropdown-menu {
         position: static;
         float: none;
         border: none;
@@ -105,25 +97,25 @@ nav .btn-outline-secondary:hover {
         background-color: #fff;
     }
 
-    .navbar-collapse .dropdown-item {
+    nav .navbar-collapse .dropdown-item {
         color: #555;
         font-size: 1.2rem;
         font-weight: bold;
     }
 
-    .navbar-collapse .dropdown-divider {
+    nav .navbar-collapse .dropdown-divider {
         margin: 0.5rem 0;
         border-color: #e3e3e3;
     }
 
-    .header-buttons {
+    nav .header-buttons {
         display: flex;
         justify-content: space-between;
         /*margin-top: 1rem;*/
         margin: 1%;
     }
 
-    .header-buttons button {
+    nav .header-buttons button {
         flex-basis: 49%;
     }
 }
@@ -131,7 +123,7 @@ nav .btn-outline-secondary:hover {
 /*===== Login / Sign Up =====*/
 
 /* form container */
-.form-container {
+.modal-dialog .form-container {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -141,18 +133,18 @@ nav .btn-outline-secondary:hover {
 }
 
 /* form header */
-.form-header {
+.modal-dialog .form-header {
     margin: 0 0 20px;
     text-align: center;
 }
 
-.form-header h2 {
+.modal-dialog .form-header h2 {
     font-size: 36px;
     color: #333;
 }
 
 /* form input fields */
-.form-input {
+.modal-dialog .form-input {
     display: block;
     width: 100%;
     margin-bottom: 20px;
@@ -164,13 +156,13 @@ nav .btn-outline-secondary:hover {
     background-color: #f5f5f5;
 }
 
-.form-input:focus {
+.modal-dialog .form-input:focus {
     outline: none;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* form submit button */
-.form-submit {
+.modal-dialog .form-submit {
     display: block;
     width: 100%;
     padding: 10px;
@@ -182,14 +174,14 @@ nav .btn-outline-secondary:hover {
     font-weight: bold;
 }
 
-.form-submit:hover {
+.modal-dialog .form-submit:hover {
     color: #fff;
     background-color: #555;
     border-color: #555;
 }
 
 /* form link */
-.form-link {
+.modal-dialog .form-link {
     display: block;
     margin-top: 10px;
     font-size: 14px;
@@ -198,12 +190,12 @@ nav .btn-outline-secondary:hover {
     text-decoration: none;
 }
 
-.form-link:hover {
+.modal-dialog .form-link:hover {
     text-decoration: underline;
 }
 
 
-.btn-secondary {
+.modal-dialog .btn-secondary {
     background-color: #e0e0e0;
     color: #555;
     border: none;
@@ -213,11 +205,11 @@ nav .btn-outline-secondary:hover {
     cursor: pointer;
 }
 
-.btn-secondary:hover {
+.modal-dialog .btn-secondary:hover {
     background-color: #ccc;
 }
 
-.btn-primary {
+.modal-dialog .btn-primary {
     background-color: #555;
     color: #fff;
     border: none;
@@ -227,62 +219,48 @@ nav .btn-outline-secondary:hover {
     cursor: pointer;
 }
 
-.btn-primary:hover {
+.modal-dialog .btn-primary:hover {
     background-color: #444;
 }
 
-.log-in-btn {
+.modal-dialog .log-in-btn {
     background-color: #555;
     color: #fff;
 }
 
-.log-in-btn:hover {
+.modal-dialog .log-in-btn:hover {
     background-color: #444;
 }
 
-.modal-header {
+.modal-dialog .modal-header {
     background-color: #eaeaea;
     border-bottom: none;
 }
 
-.modal-title {
+.modal-dialog .modal-title {
     color: #333;
     font-size: 24px;
     font-weight: 700;
     text-align: center;
 }
 
-.btn-close {
+.modal-dialog .btn-close {
     color: #333;
 }
 
-.modal-body {
+.modal-dialog .modal-body {
     background-color: #f7f7f7;
     padding: 20px;
 }
 
+/*===================================================*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*========== MAIN PAGE ==========*/
 
 /* Style for banner section */
 .banner {
+    background-color: #05021D;
     background-image: url("https://t3.ftcdn.net/jpg/04/82/07/90/360_F_482079087_jTfhGFhJgMeWt40zI9qhgjTQX7zXtLd0.jpg");
     background-size: cover;
     background-position: center;
@@ -290,25 +268,44 @@ nav .btn-outline-secondary:hover {
     text-shadow: 3px 3px 5px #000000;
     padding: 120px 0;
     text-align: center;
-
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .banner-text h1 {
-    font-size: 48px;
-    margin-bottom: 30px;
+    font-size: 3.5rem;
+    text-shadow: 6px 6px 5px #000000;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .banner-text p {
-    font-size: 24px;
-    margin-bottom: 50px;
+    font-size: 1.5rem;
+    text-shadow: 6px 6px 5px #000000;
+    margin-bottom: 2rem;
+    line-height: 1.5;
 }
 
 .banner-text button {
     font-size: 18px;
     padding: 12px 30px;
     border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.79);
+    color: #05021D;
+    border: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.banner-text button:hover {
+    /*background-color: #fff;*/
+    color: #05021D;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    background-color: #FDB813;
 }
 
 /* Style for features section */
@@ -322,6 +319,11 @@ nav .btn-outline-secondary:hover {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.feature:hover {
+    transform: translateY(-1px);
 }
 
 .features h3 {
@@ -358,6 +360,12 @@ nav .btn-outline-secondary:hover {
 
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    transform: translateY(-1px);
 }
 
 .card-title {
@@ -380,10 +388,18 @@ nav .btn-outline-secondary:hover {
 }
 
 .card a.btn-primary {
+    background-color: rgba(36, 109, 255, 0.84);
     font-size: 18px;
     padding: 12px 30px;
     border-radius: 50px;
+    transition: all 0.3s ease-in-out;
 }
+
+.card a.btn-primary:hover {
+    background-color: rgb(36, 109, 255);;
+    transform: translateY(-2px);
+}
+
 
 /* Style for testimonials section */
 .testimonials {
@@ -417,11 +433,4 @@ nav .btn-outline-secondary:hover {
     font-style: italic;
 }
 
-
-
-
-
-
-
-
-
+/*========================*/
