@@ -1,0 +1,427 @@
+/*=====Main tags=====*/
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #444;
+    /*background-color: #f5f5f5;*/
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    /*background-image: url("https://cdn.leonardo.ai/users/752743f8-2a91-4719-a0e5-faf0947cb534/generations/6e34d03a-a53d-4905-9ade-97fffc1aa8ea/Leonardo_Creative_gray_background_0.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: 100% 100%;*/
+
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/embossed-diamond.png");
+}
+
+header {
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+main {
+    margin-top: 10px;
+    background-color: #fcfcfc;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+
+    flex-grow: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+/*===================*/
+
+/*======Navbar=======*/
+nav .navbar-brand {
+    color: #555;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+nav .navbar-nav .nav-link {
+    color: #555;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 1.5rem;
+}
+
+
+nav.navbar .navbar-nav .nav-link.active,
+nav.navbar .navbar-nav .nav-link:hover {
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+
+nav.navbar .btn {
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 0.25rem;
+
+    margin: 2px;
+}
+
+nav .btn-outline-secondary {
+    color: #555;
+    border-color: #555;
+    font-weight: bold;
+}
+
+nav .btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #555;
+    border-color: #555;
+}
+
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,.1);
+        margin-top: 0.5%;
+        padding: 1rem 0;
+    }
+
+    nav .navbar-nav .nav-link {
+        color: #555;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-left: 0.5%;
+        margin-right: 0.5%;
+        padding-left: 2%;
+    }
+
+    .navbar-collapse .dropdown-menu {
+        position: static;
+        float: none;
+        border: none;
+        box-shadow: none;
+        background-color: #fff;
+    }
+
+    .navbar-collapse .dropdown-item {
+        color: #555;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .navbar-collapse .dropdown-divider {
+        margin: 0.5rem 0;
+        border-color: #e3e3e3;
+    }
+
+    .header-buttons {
+        display: flex;
+        justify-content: space-between;
+        /*margin-top: 1rem;*/
+        margin: 1%;
+    }
+
+    .header-buttons button {
+        flex-basis: 49%;
+    }
+}
+
+/*===== Login / Sign Up =====*/
+
+/* form container */
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* form header */
+.form-header {
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+.form-header h2 {
+    font-size: 36px;
+    color: #333;
+}
+
+/* form input fields */
+.form-input {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.form-input:focus {
+    outline: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* form submit button */
+.form-submit {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #555;
+    border: 2px solid;
+    border-color: #555;
+    font-weight: bold;
+}
+
+.form-submit:hover {
+    color: #fff;
+    background-color: #555;
+    border-color: #555;
+}
+
+/* form link */
+.form-link {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+}
+
+.form-link:hover {
+    text-decoration: underline;
+}
+
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #555;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #ccc;
+}
+
+.btn-primary {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #444;
+}
+
+.log-in-btn {
+    background-color: #555;
+    color: #fff;
+}
+
+.log-in-btn:hover {
+    background-color: #444;
+}
+
+.modal-header {
+    background-color: #eaeaea;
+    border-bottom: none;
+}
+
+.modal-title {
+    color: #333;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.btn-close {
+    color: #333;
+}
+
+.modal-body {
+    background-color: #f7f7f7;
+    padding: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Style for banner section */
+.banner {
+    background-image: url("https://t3.ftcdn.net/jpg/04/82/07/90/360_F_482079087_jTfhGFhJgMeWt40zI9qhgjTQX7zXtLd0.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-shadow: 3px 3px 5px #000000;
+    padding: 120px 0;
+    text-align: center;
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.banner-text h1 {
+    font-size: 48px;
+    margin-bottom: 30px;
+}
+
+.banner-text p {
+    font-size: 24px;
+    margin-bottom: 50px;
+}
+
+.banner-text button {
+    font-size: 18px;
+    padding: 12px 30px;
+    border-radius: 50px;
+}
+
+/* Style for features section */
+.features {
+
+    padding: 40px;
+    text-align: center;
+}
+
+.feature {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.features h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.features p {
+    font-size: 18px;
+}
+
+.features i {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+/* Style for courses section */
+.courses {
+    padding: 40px;
+    text-align: center;
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.courses h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+}
+
+.card {
+    border: none;
+    margin-bottom: 50px;
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 40px;
+}
+
+.card a.btn-primary {
+    font-size: 18px;
+    padding: 12px 30px;
+    border-radius: 50px;
+}
+
+/* Style for testimonials section */
+.testimonials {
+    background-color: #f9f9f9;
+    padding: 40px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+}
+
+.testimonial {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 40px;
+    margin-bottom: 50px;
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.testimonial p:first-child {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.testimonial p.testimonial-author {
+    font-size: 18px;
+    font-style: italic;
+}
+
+
+
+
+
+
+
+
+
