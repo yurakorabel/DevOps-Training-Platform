@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <title>DevOps Training Platform</title>
+    <title>Interesting</title>
 </head>
 <body>
     <header class="bg-white shadow-sm">
@@ -16,10 +16,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Main</a>
+                        <a class="nav-link" href="index.php">Main</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="interesting.php">Interesting</a>
+                        <a class="nav-link active" href="#">Interesting</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="tasks.php">Tasks</a>
@@ -38,100 +38,45 @@
     </header>
 
 
-    <main class="main-page container">
-        <section class="banner">
-            <div class="banner-text">
-                <h1>Welcome to the DevOps Learning Platform</h1>
-                <p>Master the skills you need to succeed in the fast-paced world of DevOps</p>
-                <button class="btn btn-warning banner-text-button">Start Learning</button>
-            </div>
-        </section>
-
-        <section class="features">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="feature">
-                        <i class="bi bi-cpu"></i>
-                        <h3>Hands-on Learning</h3>
-                        <p>Our platform offers real-world projects and simulations that help you build practical skills.</p>
+    <main class="interesting-page container">
+        <div class="row">
+            <section class="col-md-8">
+                <h1>Latest Posts</h1>
+                <article class="card">
+                    <img src="https://via.placeholder.com/500x250" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h2 class="card-title">Post Title</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales arcu eu nulla vulputate, non posuere lectus eleifend. Donec consectetur nisl eu libero hendrerit rhoncus.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature">
-                        <i class="bi bi-calendar"></i>
-                        <h3>Flexible Scheduling</h3>
-                        <p>You can learn at your own pace and on your own schedule, with access to our platform 24/7.</p>
+                </article>
+                <article class="card">
+                    <img src="https://via.placeholder.com/500x250" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h2 class="card-title">Post Title</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales arcu eu nulla vulputate, non posuere lectus eleifend. Donec consectetur nisl eu libero hendrerit rhoncus.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature">
-                        <i class="bi bi-globe"></i>
-                        <h3>Global Community</h3>
-                        <p>Connect with other learners from around the world and collaborate on projects and challenges.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="courses">
-            <h2>Popular Courses</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="images/ItSvit_DevOps-business-value-and-advantages_Cover_1-1-1.png" class="card-img-top" alt="Course 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Introduction to DevOps</h5>
-                            <p class="card-text">Learn the basics of DevOps, including continuous integration and delivery, with hands-on projects.</p>
-                            <a href="#" class="btn btn-primary">Enroll Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="images/cover.png" class="card-img-top" alt="Course 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Docker Fundamentals</h5>
-                            <p class="card-text">Master containerization with Docker, from building images to deploying and scaling applications.</p>
-                            <a href="#" class="btn btn-primary">Enroll Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="images/OnDemandWebinar-Kubernetes-KeyGraphic-@2x-768x422.png" class="card-img-top" alt="Course 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Kubernetes Essentials</h5>
-                            <p class="card-text">Learn how to deploy and manage applications in a Kubernetes cluster, including scaling and autohealing.</p>
-                            <a href="#" class="btn btn-primary">Enroll Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="testimonials">
-            <h2>What Our Students Say</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="testimonial">
-                        <p>"I loved my experience at this school. The teachers were knowledgeable and supportive, and the classes were challenging but manageable. I feel well-prepared for my future career thanks to this school."</p>
-                        <p class="testimonial-author">- Emily W.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial">
-                        <p>"This school exceeded my expectations in every way. The facilities were top-notch, the professors were passionate and engaging, and the coursework was rigorous but rewarding. I would highly recommend this school to anyone looking to further their education."</p>
-                        <p class="testimonial-author">- Jessica T.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial">
-                        <p>"I was hesitant to enroll in this school at first, but I'm so glad I did. The curriculum was comprehensive and the instructors were great at explaining complex topics. I learned so much and feel confident in my abilities now."</p>
-                        <p class="testimonial-author">- Alex S.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </article>
+            </section>
+            <aside class="col-md-4">
+                <h1>Categories</h1>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Category 1
+                        <span class="badge bg-primary rounded-pill">10</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Category 2
+                        <span class="badge bg-primary rounded-pill">5</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Category 3
+                        <span class="badge bg-primary rounded-pill">2</span>
+                    </li>
+                </ul>
+            </aside>
+        </div>
     </main>
 
 
