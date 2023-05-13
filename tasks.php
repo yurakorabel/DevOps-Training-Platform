@@ -39,6 +39,95 @@
 
 
     <main class="container">
+        <h1 class="text-center my-4">DevOps Practice Tasks</h1>
+
+        <!-- Beginner Tasks -->
+        <h2 class="mt-5">Beginner Tasks</h2>
+        <div class="card-deck mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 1</h5>
+                    <p class="card-text">Description of Task 1.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 2</h5>
+                    <p class="card-text">Description of Task 2.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 3</h5>
+                    <p class="card-text">Description of Task 3.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Intermediate Tasks -->
+        <h2 class="mt-5">Intermediate Tasks</h2>
+        <div class="card-deck mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 4</h5>
+                    <p class="card-text">Description of Task 4.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 5</h5>
+                    <p class="card-text">Description of Task 5.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 6</h5>
+                    <p class="card-text">Description of Task 6.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Tasks -->
+        <h2 class="mt-5">Advanced Tasks</h2>
+        <div class="card-deck mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 7</h5>
+                    <p class="card-text">Description of Task 7.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 8</h5>
+                    <p class="card-text">Description of Task 8.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task 9</h5>
+                    <p class="card-text">Description of Task 9.</p>
+                    <a href="#" class="btn btn-primary">Start Task</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Categories -->
+        <h2 class="mt-5">Task Categories</h2>
+        <div class="list-group mt-3">
+            <a href="#" class="list-group-item list-group-item-action">Automation</a>
+            <a href="#" class="list-group-item list-group-item-action">Containerization</a>
+            <a href="#" class="list-group-item list-group-item-action">Continuous Integration and Deployment</a>
+            <a href="#" class="list-group-item list-group-item-action">Monitoring and Logging</a>
+            <a href="#" class="list-group-item list-group-item-action">Security</a>
+        </div>
 
     </main>
 

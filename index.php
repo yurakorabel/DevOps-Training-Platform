@@ -43,7 +43,7 @@
             <div class="banner-text">
                 <h1>Welcome to the DevOps Learning Platform</h1>
                 <p>Master the skills you need to succeed in the fast-paced world of DevOps</p>
-                <button class="btn btn-warning banner-text-button">Start Learning</button>
+                <button class="btn btn-warning banner-text-button" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Start Learning</button>
             </div>
         </section>
 

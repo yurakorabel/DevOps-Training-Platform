@@ -384,7 +384,8 @@ nav .btn-outline-secondary:hover {
     padding: 40px;
 }
 
-.card a.btn-primary {
+.card a.btn-primary,
+.card button.btn-primary{
     background-color: rgba(36, 109, 255, 0.84);
     font-size: 18px;
     padding: 12px 30px;
@@ -392,10 +393,12 @@ nav .btn-outline-secondary:hover {
     transition: all 0.3s ease-in-out;
 }
 
-.card a.btn-primary:hover {
+.card a.btn-primary:hover,
+.card button.btn-primary:hover{
     background-color: rgb(36, 109, 255);;
     transform: translateY(-2px);
 }
+
 
 
 /* Style for testimonials section */
@@ -438,8 +441,9 @@ nav .btn-outline-secondary:hover {
 }
 
 .interesting-page .card-img-top {
-    max-width: 100%;
-    height: 250px;
+    /*max-width: 100%;*/
+    /*height: 250px;*/
+    /*width: 100%;*/
 }
 
 .interesting-page .card-title {
@@ -521,3 +525,7 @@ nav .btn-outline-secondary:hover {
         padding: 5px;
     }
 }
+
+
+/*========== TASKS PAGE ==========*/
+

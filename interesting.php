@@ -1,3 +1,23 @@
+<?php
+require 'vendor/connect.php';
+
+$categories = mysqli_query($conn, "SELECT category_name, COUNT(id_post) AS post_count
+                                            FROM news_category
+                                            LEFT JOIN interesting ON id_interesting_category = interesting.news_category_id_interesting_category
+                                            GROUP BY category_name;");
+$categories = mysqli_fetch_all($categories);
+
+$news = mysqli_query($conn, "SELECT id_post, post_image, post_title, post_preview_text, 
+                                            post_main_text, category_name FROM interesting
+                                    JOIN news_category ON news_category_id_interesting_category = news_category.id_interesting_category;");
+$news = mysqli_fetch_all($news);
+
+$news_count = mysqli_query($conn, "SELECT COUNT(id_post) AS total_posts FROM interesting;");
+$news_count = mysqli_fetch_all($news_count);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,40 +60,40 @@
 
     <main class="interesting-page container">
         <div class="row">
-            <section class="col-md-8">
-                <h1>Latest Posts</h1>
-                <article class="card">
-                    <img src="https://via.placeholder.com/500x250" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h2 class="card-title">Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales arcu eu nulla vulputate, non posuere lectus eleifend. Donec consectetur nisl eu libero hendrerit rhoncus.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
-                    </div>
-                </article>
-                <article class="card">
-                    <img src="https://via.placeholder.com/500x250" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h2 class="card-title">Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales arcu eu nulla vulputate, non posuere lectus eleifend. Donec consectetur nisl eu libero hendrerit rhoncus.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
-                    </div>
-                </article>
+            <section class="col-md-9">
+                <?php
+                foreach($news as $post){
+                    ?>
+                    <article class="card">
+                        <img src="<?=$post[1]?>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p><?=$post[5]?></p>
+                            <h2 class="card-title"><?=$post[2]?></h2>
+                            <p class="card-text"><?=$post[3]?></p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#<?=$post[0]?>">Read More</button>
+                        </div>
+                    </article>
+                    <?php
+                }
+                ?>
             </section>
-            <aside class="col-md-4">
+            <aside class="col-md-3">
                 <h1>Categories</h1>
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Category 1
-                        <span class="badge bg-primary rounded-pill">10</span>
+                        All
+                        <span class="badge bg-primary rounded-pill"><?=$news_count[0][0]?></span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Category 2
-                        <span class="badge bg-primary rounded-pill">5</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Category 3
-                        <span class="badge bg-primary rounded-pill">2</span>
-                    </li>
+                    <?php
+                    foreach($categories as $category){
+                        ?>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <?=$category[0]?>
+                            <span class="badge bg-primary rounded-pill"><?=$category[1]?></span>
+                        </li>
+                        <?php
+                    }
+                    ?>
                 </ul>
             </aside>
         </div>
@@ -93,6 +113,29 @@
         </div>
     </footer>
 
+    <?php
+    foreach($news as $post){
+        ?>
+        <div class="modal fade" id="<?=$post[0]?>" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-title"><?=$post[2]?></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="<?=$post[1]?>" class="card-img-top" alt="...">
+                        <hr>
+                        <h5><?=$post[3]?></h5>
+                        <hr>
+                        <p><?=$post[4]?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">

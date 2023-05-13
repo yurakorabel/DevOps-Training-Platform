@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost:8889";
 $username = "root";
-$database = "computer_tehnika";
+$database = "devops_db";
 
 $conn = mysqli_connect($servername, $username, "", $database);
 
