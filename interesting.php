@@ -9,7 +9,9 @@ $categories = mysqli_fetch_all($categories);
 
 $news = mysqli_query($conn, "SELECT id_post, post_image, post_title, post_preview_text, 
                                             post_main_text, category_name FROM interesting
-                                    JOIN news_category ON news_category_id_interesting_category = news_category.id_interesting_category;");
+                                    JOIN news_category ON news_category_id_interesting_category = news_category.id_interesting_category
+                                    ORDER BY id_post DESC
+;");
 $news = mysqli_fetch_all($news);
 
 $news_count = mysqli_query($conn, "SELECT COUNT(id_post) AS total_posts FROM interesting;");
@@ -64,10 +66,10 @@ $news_count = mysqli_fetch_all($news_count);
                 <?php
                 foreach($news as $post){
                     ?>
-                    <article class="card">
+                    <article class="card article-js">
                         <img src="<?=$post[1]?>" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p><?=$post[5]?></p>
+                            <p class="newsCategory"><?=$post[5]?></p>
                             <h2 class="card-title"><?=$post[2]?></h2>
                             <p class="card-text"><?=$post[3]?></p>
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#<?=$post[0]?>">Read More</button>
@@ -80,15 +82,15 @@ $news_count = mysqli_fetch_all($news_count);
             <aside class="col-md-3">
                 <h1>Categories</h1>
                 <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        All
+                    <li class="list-group-item d-flex justify-content-between align-items-center category-wrap-js">
+                        <span class="category-span-js">All</span>
                         <span class="badge bg-primary rounded-pill"><?=$news_count[0][0]?></span>
                     </li>
                     <?php
                     foreach($categories as $category){
                         ?>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <?=$category[0]?>
+                        <li class="list-group-item d-flex justify-content-between align-items-center category-wrap-js">
+                            <span class="category-span-js"><?=$category[0]?></span>
                             <span class="badge bg-primary rounded-pill"><?=$category[1]?></span>
                         </li>
                         <?php

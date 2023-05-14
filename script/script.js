@@ -1,29 +1,28 @@
-// Get references to the category links and articles
-const categoryLinks = document.querySelectorAll('.list-group-item');
-const articles = document.querySelectorAll('article');
+window.addEventListener('load', e => {
+    const categoryWraps = document.querySelectorAll('.category-wrap-js');
+    const articles = document.querySelectorAll('.article-js');
 
-// Add click event listeners to the category links
-categoryLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-        event.preventDefault();
+    if (categoryWraps != null) {
+        categoryWraps.forEach(elem => {
+            elem.addEventListener('click', e => {
+                let categoryName = elem.querySelector('.category-span-js').textContent.trim();
 
-        // Get the category name from the link
-        const categoryName = link.textContent.trim();
+                articles.forEach(elem => {
+                    if (elem.querySelector('.newsCategory').textContent.trim() == categoryName) {
+                        elem.style.display = 'block'
+                    }
+                    else if (categoryName == 'All') {
+                        elem.style.display = 'block'
+                    }
+                    else{
+                        elem.style.display = 'none'
+                    }
+                })
 
-        // Hide all articles initially
-        articles.forEach(article => {
-            article.style.display = 'none';
-        });
-
-        // Show articles that belong to the selected category
-        articles.forEach(article => {
-            if (article.querySelector('p').textContent === categoryName) {
-                article.style.display = 'block';
-            }
-        });
-    });
-});
-
+            })
+        })
+    }
+})
 
 
 
