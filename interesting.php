@@ -10,8 +10,7 @@ $categories = mysqli_fetch_all($categories);
 $news = mysqli_query($conn, "SELECT id_post, post_image, post_title, post_preview_text, 
                                             post_main_text, category_name FROM interesting
                                     JOIN news_category ON news_category_id_interesting_category = news_category.id_interesting_category
-                                    ORDER BY id_post DESC
-;");
+                                    ORDER BY id_post DESC;");
 $news = mysqli_fetch_all($news);
 
 $news_count = mysqli_query($conn, "SELECT COUNT(id_post) AS total_posts FROM interesting;");

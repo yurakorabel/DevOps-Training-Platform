@@ -1,3 +1,21 @@
+<?php
+require 'vendor/connect.php';
+
+$task_difficulty_levels = mysqli_query($conn, "SELECT * FROM difficulty_level;");
+$task_difficulty_levels = mysqli_fetch_all($task_difficulty_levels);
+
+$task_categories = mysqli_query($conn, "SELECT * FROM category;");
+$task_categories = mysqli_fetch_all($task_categories);
+
+$task_tickets = mysqli_query($conn, "SELECT id_task, task_title, task_preview_text, task_final_text, level_name, category_name FROM task
+                                        JOIN difficulty_level ON difficulty_level_id_difficulty_level = difficulty_level.id_difficulty_level
+                                        JOIN category ON category_id_category = category.id_category
+                                        ORDER BY id_task DESC ;");
+$task_tickets = mysqli_fetch_all($task_tickets);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,101 +50,64 @@
                     <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
                     <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
                 </div>
-
             </div>
         </nav>
     </header>
 
 
-    <main class="container">
-        <h1 class="text-center my-4">DevOps Practice Tasks</h1>
-
-        <!-- Beginner Tasks -->
-        <h2 class="mt-5">Beginner Tasks</h2>
-        <div class="card-deck mt-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 1</h5>
-                    <p class="card-text">Description of Task 1.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 2</h5>
-                    <p class="card-text">Description of Task 2.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 3</h5>
-                    <p class="card-text">Description of Task 3.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Intermediate Tasks -->
-        <h2 class="mt-5">Intermediate Tasks</h2>
-        <div class="card-deck mt-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 4</h5>
-                    <p class="card-text">Description of Task 4.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 5</h5>
-                    <p class="card-text">Description of Task 5.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 6</h5>
-                    <p class="card-text">Description of Task 6.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Advanced Tasks -->
-        <h2 class="mt-5">Advanced Tasks</h2>
-        <div class="card-deck mt-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 7</h5>
-                    <p class="card-text">Description of Task 7.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 8</h5>
-                    <p class="card-text">Description of Task 8.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task 9</h5>
-                    <p class="card-text">Description of Task 9.</p>
-                    <a href="#" class="btn btn-primary">Start Task</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Task Categories -->
-        <h2 class="mt-5">Task Categories</h2>
-        <div class="list-group mt-3">
-            <a href="#" class="list-group-item list-group-item-action">Automation</a>
-            <a href="#" class="list-group-item list-group-item-action">Containerization</a>
-            <a href="#" class="list-group-item list-group-item-action">Continuous Integration and Deployment</a>
-            <a href="#" class="list-group-item list-group-item-action">Monitoring and Logging</a>
-            <a href="#" class="list-group-item list-group-item-action">Security</a>
+    <main class="interesting-page task-page container">
+        <div class="row">
+            <section class="col-md-9">
+                <?php
+                foreach($task_tickets as $task_ticket){
+                    ?>
+                    <article class="card article-js">
+                        <div class="card-body">
+                            <h1 class="card-title"><?=$task_ticket[1]?></h1>
+                            <p class="card-text"><?=$task_ticket[2]?></p>
+                            <hr>
+                            <h6 class="card-subtitle mb-2 text-muted">Difficulty level: <?=$task_ticket[4]?></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Category: <?=$task_ticket[5]?></h6>
+                            <br>
+                            <button class="btn btn-primary" type="button" onclick="location.href='task-page.php?id=<?=$task_ticket[0]?>'">task details</button>
+                        </div>
+                    </article>
+                    <?php
+                }
+                ?>
+            </section>
+            <aside class="col-md-3">
+                <h1 class="mb-3">Filter</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="difficulty" class="form-label">Difficulty level:</label>
+                        <select class="form-select" id="difficulty">
+                            <option value="">All</option>
+                            <?php
+                            foreach($task_difficulty_levels as $task_difficulty_level){
+                                ?>
+                                <option value="beginner"><?=$task_difficulty_level[1]?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="technology" class="form-label">Category:</label>
+                        <select class="form-select" id="technology">
+                            <option value="">All</option>
+                            <?php
+                            foreach($task_categories as $task_category){
+                                ?>
+                                <option value="beginner"><?=$task_category[1]?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2 filter-button">Filter</button>
+                </form>
+            </aside>
         </div>
 
     </main>
@@ -144,7 +125,6 @@
             </div>
         </div>
     </footer>
-
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">

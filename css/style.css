@@ -478,6 +478,13 @@ nav .btn-outline-secondary:hover {
     padding: 5px;
 }
 
+p.newsCategory {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+
 /* Media queries for responsive design */
 @media (max-width: 767px) {
     .interesting-page aside {
@@ -529,3 +536,44 @@ nav .btn-outline-secondary:hover {
 
 /*========== TASKS PAGE ==========*/
 
+.task-page h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.task-page .form-group {
+    margin-bottom: 20px;
+}
+
+.task-page label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.task-page select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.task-page .filter-button {
+    width: 100%;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.task-page button:hover {
+    background-color: #0069d9;
+}
