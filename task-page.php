@@ -75,7 +75,7 @@ $task_steps = mysqli_fetch_all($task_steps);
                     <?php
                     foreach($task_requirements as $task_requirement){
                         ?>
-                        <li class="list-group-item"><?=$task_requirement[2]?></li>
+                        <li class="list-group-item">- <?=$task_requirement[2]?></li>
                         <?php
                     }
                     ?>
@@ -83,10 +83,12 @@ $task_steps = mysqli_fetch_all($task_steps);
                 <h5 class="mt-4">Steps:</h5>
                 <ol class="list-group">
                     <?php
+                    $step_num = 1;
                     foreach($task_steps as $task_step){
                         ?>
-                        <li class="list-group-item"><?=$task_step[2]?></li>
+                        <li class="list-group-item"><?=$step_num?>. <?=$task_step[2]?></li>
                         <?php
+                        $step_num++;
                     }
                     ?>
                 </ol>
