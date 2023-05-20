@@ -577,3 +577,29 @@ p.newsCategory {
 .task-page button:hover {
     background-color: #0069d9;
 }
+
+/*========== !ADMIN! ==========*/
+
+.vitalik .delete-button {
+    background-color: #ff0000;
+    font-size: 22px;
+    color: #fff;
+    padding: 5px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    transition: background-color 0.4s ease-out;
+}
+
+.vitalik button.delete-button:hover {
+    background-color: #cc0000;
+}
+
+.create-task {
+    transition: background-color 0.4s ease-out;
+}
+
+button.create-task:hover {
+    background-color: #009117;
+}

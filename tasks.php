@@ -56,20 +56,22 @@ $task_tickets = mysqli_fetch_all($task_tickets);
 
 
     <main class="interesting-page task-page container">
+        <h1 class="title not-found-js" style="display: none;">There are no tasks for this filter yet</h1>
+
         <div class="row">
             <section class="col-md-9">
                 <?php
                 foreach($task_tickets as $task_ticket){
                     ?>
-                    <article class="card article-js">
+                    <article class="card article-js task-js">
                         <div class="card-body">
                             <h1 class="card-title"><?=$task_ticket[1]?></h1>
                             <p class="card-text"><?=$task_ticket[2]?></p>
                             <hr>
-                            <h6 class="card-subtitle mb-2 text-muted">Difficulty level: <?=$task_ticket[4]?></h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Category: <?=$task_ticket[5]?></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Difficulty level: <span class="task-diff-js"><?=$task_ticket[4]?></span></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Category: <span class="task-cat-js"><?=$task_ticket[5]?></span></h6>
                             <br>
-                            <button class="btn btn-primary" type="button" onclick="location.href='task-page.php?id=<?=$task_ticket[0]?>'">task details</button>
+                            <button class="btn btn-primary" type="button" onclick="location.href='task-page.php?id=<?=$task_ticket[0]?>'">Task Details</button>
                         </div>
                     </article>
                     <?php
@@ -78,35 +80,33 @@ $task_tickets = mysqli_fetch_all($task_tickets);
             </section>
             <aside class="col-md-3">
                 <h1 class="mb-3">Filter</h1>
-                <form>
-                    <div class="form-group">
-                        <label for="difficulty" class="form-label">Difficulty level:</label>
-                        <select class="form-select" id="difficulty">
-                            <option value="">All</option>
-                            <?php
-                            foreach($task_difficulty_levels as $task_difficulty_level){
-                                ?>
-                                <option value="beginner"><?=$task_difficulty_level[1]?></option>
-                                <?php
-                            }
+                <div class="form-group">
+                    <label for="difficulty" class="form-label">Difficulty level:</label>
+                    <select class="form-select" id="difficulty">
+                        <option value="All">All</option>
+                        <?php
+                        foreach($task_difficulty_levels as $task_difficulty_level){
                             ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="technology" class="form-label">Category:</label>
-                        <select class="form-select" id="technology">
-                            <option value="">All</option>
+                            <option value="<?=$task_difficulty_level[1]?>" class="difficulty-level-js"><?=$task_difficulty_level[1]?></option>
                             <?php
-                            foreach($task_categories as $task_category){
-                                ?>
-                                <option value="beginner"><?=$task_category[1]?></option>
-                                <?php
-                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="technology" class="form-label">Category:</label>
+                    <select class="form-select" id="technology">
+                        <option value="All">All</option>
+                        <?php
+                        foreach($task_categories as $task_category){
                             ?>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-2 filter-button">Filter</button>
-                </form>
+                            <option value="<?=$task_category[1]?>" class="task-category-js"><?=$task_category[1]?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <button class="btn btn-primary mt-2 filter-button">Filter</button>
             </aside>
         </div>
 
