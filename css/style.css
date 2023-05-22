@@ -385,7 +385,8 @@ nav .btn-outline-secondary:hover {
 }
 
 .card a.btn-primary,
-.card button.btn-primary{
+.card button.btn-primary,
+button.turn-back{
     background-color: rgba(36, 109, 255, 0.84);
     font-size: 18px;
     padding: 12px 30px;
@@ -394,7 +395,8 @@ nav .btn-outline-secondary:hover {
 }
 
 .card a.btn-primary:hover,
-.card button.btn-primary:hover{
+.card button.btn-primary:hover,
+button.turn-back{
     background-color: rgb(36, 109, 255);;
     transform: translateY(-2px);
 }

@@ -1,31 +1,63 @@
+<?php
+require 'vendor/connect.php';
+
+$id_course = $_GET['id'];
+$module_position = $_GET['module'];
+
+$course_tickets = mysqli_query($conn, "SELECT course_title, course_overview, course_image, award_points, level_name, category_name 
+                                        FROM courses
+                                        JOIN difficulty_level ON difficulty_level_id_difficulty_level = difficulty_level.id_difficulty_level
+                                        JOIN category ON category_id_category = category.id_category
+                                        WHERE id_courses = '$id_course';");
+$course_tickets = mysqli_fetch_all($course_tickets);
+
+$outline = mysqli_query($conn, "SELECT id_course_outlines, module_title, module_content, id_questions, question_text
+                                        FROM questions
+                                        JOIN course_outlines ON course_outlines_id_course_outlines = course_outlines.id_course_outlines
+                                        WHERE course_outlines_courses_id_courses = '$id_course'
+                                        AND module_position = '$module_position';");
+$outline = mysqli_fetch_all($outline);
+
+$id_question = $outline[0][3];
+$id_course_outline = $outline[0][0];
+
+$question_options = mysqli_query($conn, "SELECT * FROM question_option 
+                                                WHERE questions_id_questions = '$id_question'
+                                                AND questions_course_outlines_id_course_outlines = '$id_course_outline'
+                                                AND questions_course_outlines_courses_id_courses = '$id_course';");
+$question_options = mysqli_fetch_all($question_options);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>DevOps Training Platform Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title><?=$course_tickets[0][0]?></title>
 </head>
 <body>
 <header class="bg-white shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-light container">
-        <a class="navbar-brand" href="#">DevOps Learning Platform <b>Admin</b></a>
+        <a class="navbar-brand" href="#">DevOps Learning Platform</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="admin-main.php">Users</a>
+                    <a class="nav-link" href="index.php">Main</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin-post/admin-posts.php">Posts</a>
+                    <a class="nav-link" href="interesting.php">Interesting</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin-task/admin-tasks.php">Tasks</a>
+                    <a class="nav-link" href="tasks.php">Tasks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin-course/admin-courses.php">Courses</a>
+                    <a class="nav-link active" href="courses.php">Courses</a>
                 </li>
             </ul>
             <div class="header-buttons">
@@ -38,8 +70,34 @@
 </header>
 
 
-<main class="main-page container">
-
+<main class="interesting-page container">
+    <div class="container">
+        <button class="btn btn-primary" style="float: right;" type="button" onclick="location.href='courses.php'">Turn Back</button>
+        <h1><?=$course_tickets[0][0]?></h1>
+        <hr>
+        <h2><?=$module_position?>. <?=$outline[0][1]?></h2>
+        <p><?=$outline[0][2]?></p>
+        <hr>
+        <form>
+            <div class="form-group">
+                <label for="question"><?=$outline[0][4]?></label>
+                <?php
+                foreach ($question_options as $question_option){
+                    ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answer" id="answer-a" value="<?=$question_option[2]?>">
+                        <label class="form-check-label" for="answer-a">
+                            <?=$question_option[1]?>
+                        </label>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
 </main>
 
 
@@ -55,7 +113,6 @@
         </div>
     </div>
 </footer>
-
 
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -115,6 +172,6 @@
 
 <!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script src="../script/script.js"></script>
+<script src="script/script.js"></script>
 </body>
 </html>

@@ -43,7 +43,7 @@ $task_tickets = mysqli_fetch_all($task_tickets);
                     <a class="nav-link active" href="../admin-task/admin-tasks.php">Tasks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Courses</a>
+                    <a class="nav-link" href="../admin-course/admin-courses.php">Courses</a>
                 </li>
             </ul>
             <div class="header-buttons">

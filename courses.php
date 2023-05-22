@@ -1,3 +1,21 @@
+<?php
+require 'vendor/connect.php';
+
+$course_difficulty_levels = mysqli_query($conn, "SELECT * FROM difficulty_level;");
+$course_difficulty_levels = mysqli_fetch_all($course_difficulty_levels);
+
+$course_categories = mysqli_query($conn, "SELECT * FROM category;");
+$course_categories = mysqli_fetch_all($course_categories);
+
+$course_tickets = mysqli_query($conn, "SELECT id_courses, course_title, course_overview, course_image, level_name, category_name FROM courses
+                                        JOIN difficulty_level ON difficulty_level_id_difficulty_level = difficulty_level.id_difficulty_level
+                                        JOIN category ON category_id_category = category.id_category
+                                        ORDER BY id_courses DESC ;");
+$course_tickets = mysqli_fetch_all($course_tickets);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +56,61 @@
     </header>
 
 
-    <main class="container">
-
+    <main class="container task-page">
+        <div class="row">
+            <section class="col-md-9">
+                <?php
+                foreach($course_tickets as $course_ticket){
+                    ?>
+                    <article class="card article-js task-js">
+                        <div class="card-body">
+                            <img src="<?=$course_ticket[3]?>" class="card-img-top" alt="Course 2">
+                            <div class="card-body">
+                                <h5 class="card-title"><?=$course_ticket[1]?></h5>
+                                <p class="card-text"><?=$course_ticket[2]?></p>
+                                <hr>
+                                <h6 class="card-subtitle mb-2 text-muted">Difficulty level: <span class="task-diff-js"><?=$course_ticket[4]?></span></h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Category: <span class="task-cat-js"><?=$course_ticket[5]?></span></h6>
+                                <br>
+                                <button class="btn btn-primary" type="button" onclick="location.href='course-page.php?id=<?=$course_ticket[0]?>&module=1'">Enroll Now!</button>
+                            </div>
+                        </div>
+                    </article>
+                    <?php
+                }
+                ?>
+            </section>
+            <aside class="col-md-3">
+                <h1 class="mb-3">Filter</h1>
+                <div class="form-group">
+                    <label for="difficulty" class="form-label">Difficulty level:</label>
+                    <select class="form-select" id="difficulty">
+                        <option value="All">All</option>
+                        <?php
+                        foreach($course_difficulty_levels as $course_difficulty_level){
+                            ?>
+                            <option value="<?=$course_difficulty_level[1]?>" class="difficulty-level-js"><?=$course_difficulty_level[1]?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="technology" class="form-label">Category:</label>
+                    <select class="form-select" id="technology">
+                        <option value="All">All</option>
+                        <?php
+                        foreach($course_categories as $course_category){
+                            ?>
+                            <option value="<?=$course_category[1]?>" class="task-category-js"><?=$course_category[1]?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <button class="btn btn-primary mt-2 filter-button">Filter</button>
+            </aside>
+        </div>
     </main>
 
 

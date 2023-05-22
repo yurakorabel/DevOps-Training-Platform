@@ -77,7 +77,7 @@ $task_categories = mysqli_fetch_all($task_categories);
                 </select>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Difficulty Level</label>
+                <label for="exampleFormControlSelect1">Category</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="category">
                     <?php
                     foreach($task_categories as $task_category){

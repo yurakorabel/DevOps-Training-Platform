@@ -1,10 +1,22 @@
+<?php
+require '../../vendor/connect.php';
+
+$course_difficulty_levels = mysqli_query($conn, "SELECT * FROM difficulty_level;");
+$course_difficulty_levels = mysqli_fetch_all($course_difficulty_levels);
+
+$course_categories = mysqli_query($conn, "SELECT * FROM category;");
+$course_categories = mysqli_fetch_all($course_categories);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>DevOps Training Platform Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>Admin Create Course</title>
 </head>
 <body>
 <header class="bg-white shadow-sm">
@@ -16,30 +28,74 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="admin-main.php">Users</a>
+                    <a class="nav-link" href="../admin-main.php">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin-post/admin-posts.php">Posts</a>
+                    <a class="nav-link" href="../admin-post/admin-posts.php">Posts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin-task/admin-tasks.php">Tasks</a>
+                    <a class="nav-link" href="../admin-task/admin-tasks.php">Tasks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin-course/admin-courses.php">Courses</a>
+                    <a class="nav-link active" href="../admin-course/admin-courses.php">Courses</a>
                 </li>
             </ul>
             <div class="header-buttons">
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
             </div>
-
         </div>
     </nav>
 </header>
 
 
-<main class="main-page container">
+<main class="interesting-page task-page container">
+    <div class="container">
+        <form action="creating-course.php" method="POST">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Course Title</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Course Overview</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="overview_text" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Award Points</label>
+                <input type="number" class="form-control" id="exampleInputPassword1" name="award_points" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Difficulty Level</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="difficulty_level">
+                    <?php
+                    foreach($course_difficulty_levels as $course_difficulty_level){
+                        ?>
+                        <option value="<?=$course_difficulty_level[0]?>"><?=$course_difficulty_level[1]?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Category</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="category">
+                    <?php
+                    foreach($course_categories as $course_category){
+                        ?>
+                        <option value="<?=$course_category[0]?>"><?=$course_category[1]?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Image URL</label>
+                <input type="url" class="form-control" id="exampleInputPassword1" name="image_url" required>
+            </div>
 
+            <button type="submit" class="create-task btn btn-success" style="width: 100%;">Create Task</button>
+        </form>
+    </div>
 </main>
 
 
@@ -112,9 +168,10 @@
     </div>
 </div>
 
-
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script src="../script/script.js"></script>
+<script src="../../script/script.js"></script>
 </body>
 </html>
