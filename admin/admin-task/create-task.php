@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!$_SESSION) {
+    header('Location: ../../index.php');
+}
+
 require '../../vendor/connect.php';
 
 $task_difficulty_levels = mysqli_query($conn, "SELECT * FROM difficulty_level;");
@@ -37,12 +43,11 @@ $task_categories = mysqli_fetch_all($task_categories);
                     <a class="nav-link active" href="../admin-task/admin-tasks.php">Tasks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Courses</a>
+                    <a class="nav-link" href="../admin-course/admin-courses.php">Courses</a>
                 </li>
             </ul>
             <div class="header-buttons">
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                <button class="btn btn-outline-secondary" type="button" onclick="location.href = '../../vendor/logout.php';">Log out</button>
             </div>
         </div>
     </nav>
@@ -127,62 +132,6 @@ $task_categories = mysqli_fetch_all($task_categories);
         </div>
     </div>
 </footer>
-
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Log in</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-container">
-                    <div class="form-header">
-                        <h2>Login Form</h2>
-                    </div>
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
-                    <button type="submit" class="form-submit">Login</button>
-                    <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#signupModal">Create an account</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary log-in-btn">Log in</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Sign up Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="signupModalLabel">Sign up</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-container">
-                    <div class="form-header">
-                        <h2>Sign Up Form</h2>
-                    </div>
-                    <input type="text" class="form-input" placeholder="Name">
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
-                    <button type="submit" class="form-submit">Sign Up</button>
-                    <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#loginModal">Already have an account?</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary log-in-btn">Sign up</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

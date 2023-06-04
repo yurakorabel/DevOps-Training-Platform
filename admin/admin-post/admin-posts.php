@@ -1,4 +1,11 @@
 <?php
+session_start();
+require '../../vendor/connect.php';
+
+if (!$_SESSION) {
+    header('Location: ../../index.php');
+}
+
 require '../../vendor/connect.php';
 
 $categories = mysqli_query($conn, "SELECT category_name, COUNT(id_post) AS post_count
@@ -51,8 +58,7 @@ $news_count = mysqli_fetch_all($news_count);
                 </li>
             </ul>
             <div class="header-buttons">
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                <button class="btn btn-outline-secondary" type="button" onclick="location.href = '../../vendor/logout.php';">Log out</button>
             </div>
         </div>
     </nav>
@@ -120,63 +126,6 @@ $news_count = mysqli_fetch_all($news_count);
         </div>
     </div>
 </footer>
-
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Log in</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-container">
-                    <div class="form-header">
-                        <h2>Login Form</h2>
-                    </div>
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
-                    <button type="submit" class="form-submit">Login</button>
-                    <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#signupModal">Create an account</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary log-in-btn">Log in</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Sign up Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="signupModalLabel">Sign up</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-container">
-                    <div class="form-header">
-                        <h2>Sign Up Form</h2>
-                    </div>
-                    <input type="text" class="form-input" placeholder="Name">
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
-                    <button type="submit" class="form-submit">Sign Up</button>
-                    <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#loginModal">Already have an account?</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary log-in-btn">Sign up</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

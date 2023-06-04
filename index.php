@@ -1,3 +1,19 @@
+<?php
+session_start();
+
+require 'vendor/connect.php';
+
+if ($_SESSION) {
+    $user = $_SESSION['user'];
+    $id_user = $user['id'];
+
+    $user_info = mysqli_query($conn, "SELECT * FROM `users` WHERE id_users = '$id_user';");
+    $user_info = mysqli_fetch_all($user_info);
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +32,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Main</a>
+                        <a class="nav-link active" href="index.php">Main</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="interesting.php">Interesting</a>
@@ -27,12 +43,35 @@
                     <li class="nav-item">
                         <a class="nav-link" href="courses.php">Courses</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user-table.php">TOP</a>
+                    </li>
                 </ul>
                 <div class="header-buttons">
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                    <?php
+                    if (!$_SESSION) { ?>
+                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
+                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                    <?php
+                    }
+                    else { ?>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?=$user_info[0][1]?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><p class="dropdown-item"><?=$user_info[0][1]?></p></li>
+                                    <li><p class="dropdown-item">My points: <?=$user_info[0][4]?></p></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="vendor/logout.php">Log out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <?php
+                    }
+                    ?>
                 </div>
-
             </div>
         </nav>
     </header>
@@ -43,7 +82,16 @@
             <div class="banner-text">
                 <h1>Welcome to the DevOps Learning Platform</h1>
                 <p>Master the skills you need to succeed in the fast-paced world of DevOps</p>
-                <button class="btn btn-warning banner-text-button" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Start Learning</button>
+                <?php
+                if (!$_SESSION) { ?>
+                    <button class="btn btn-warning banner-text-button" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Start Learning</button>
+                    <?php
+                }
+                else { ?>
+                    <button class="btn btn-warning banner-text-button" type="button" onclick="location.href = 'courses.php';">Start Learning</button>
+                    <?php
+                }
+                ?>
             </div>
         </section>
 
@@ -52,22 +100,22 @@
                 <div class="col-md-4">
                     <div class="feature">
                         <i class="bi bi-cpu"></i>
-                        <h3>Hands-on Learning</h3>
-                        <p>Our platform offers real-world projects and simulations that help you build practical skills.</p>
+                        <h3>Up-to-Date Content</h3>
+                        <p>Stay ahead in the fast-paced world of DevOps with our platform's up-to-date content. Regularly updated news posts, practice tasks, and training courses ensure that you're equipped with the latest industry trends and practices. Gain the skills that are in demand and stay relevant in your DevOps journey.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature">
                         <i class="bi bi-calendar"></i>
-                        <h3>Flexible Scheduling</h3>
-                        <p>You can learn at your own pace and on your own schedule, with access to our platform 24/7.</p>
+                        <h3>Time Management Made Easy</h3>
+                        <p>Take control of your learning with our flexible scheduling feature, empowering you to effectively manage your time and balance other responsibilities alongside your DevOps education. Enjoy the convenience of learning when it fits into your schedule, making your learning journey seamless and stress-free.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature">
                         <i class="bi bi-globe"></i>
-                        <h3>Global Community</h3>
-                        <p>Connect with other learners from around the world and collaborate on projects and challenges.</p>
+                        <h3>Diverse Learning Materials</h3>
+                        <p>With a wide range of posts, tasks, and courses, this platform offers diverse learning materials catering to different levels and categories of DevOps. It ensures that learners can explore various topics and choose what suits their interests and goals.</p>
                     </div>
                 </div>
             </div>
@@ -82,7 +130,16 @@
                         <div class="card-body">
                             <h5 class="card-title">Introduction to DevOps</h5>
                             <p class="card-text">Learn the basics of DevOps, including continuous integration and delivery, with hands-on projects.</p>
-                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                            <?php
+                            if (!$_SESSION) { ?>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Enroll Now</button>
+                                <?php
+                            }
+                            else { ?>
+                                <button class="btn btn-primary" type="button" onclick="location.href = 'course-page.php?id=1&module=1';">Enroll Now</button>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -92,7 +149,16 @@
                         <div class="card-body">
                             <h5 class="card-title">Docker Fundamentals</h5>
                             <p class="card-text">Master containerization with Docker, from building images to deploying and scaling applications.</p>
-                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                            <?php
+                            if (!$_SESSION) { ?>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Enroll Now</button>
+                                <?php
+                            }
+                            else { ?>
+                                <button class="btn btn-primary" type="button" onclick="location.href = 'course-page.php?id=1&module=1';">Enroll Now</button>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -102,7 +168,16 @@
                         <div class="card-body">
                             <h5 class="card-title">Kubernetes Essentials</h5>
                             <p class="card-text">Learn how to deploy and manage applications in a Kubernetes cluster, including scaling and autohealing.</p>
-                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                            <?php
+                            if (!$_SESSION) { ?>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Enroll Now</button>
+                                <?php
+                            }
+                            else { ?>
+                                <button class="btn btn-primary" type="button" onclick="location.href = 'course-page.php?id=1&module=1';">Enroll Now</button>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -110,23 +185,23 @@
         </section>
 
         <section class="testimonials">
-            <h2>What Our Students Say</h2>
+            <h2>What Our Users Say</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="testimonial">
-                        <p>"I loved my experience at this school. The teachers were knowledgeable and supportive, and the classes were challenging but manageable. I feel well-prepared for my future career thanks to this school."</p>
+                        <p>"This DevOps learning platform has revolutionized my understanding of the subject. The interactive tasks and comprehensive courses have truly enhanced my skills and boosted my confidence in implementing DevOps practices. Highly recommended!"</p>
                         <p class="testimonial-author">- Emily W.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="testimonial">
-                        <p>"This school exceeded my expectations in every way. The facilities were top-notch, the professors were passionate and engaging, and the coursework was rigorous but rewarding. I would highly recommend this school to anyone looking to further their education."</p>
+                        <p>"I can't thank the DevOps learning platform enough for its user-friendly interface and practical approach. The hands-on tasks allowed me to apply what I learned immediately, making the learning process engaging and effective. A game-changer for aspiring DevOps professionals!"</p>
                         <p class="testimonial-author">- Jessica T.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="testimonial">
-                        <p>"I was hesitant to enroll in this school at first, but I'm so glad I did. The curriculum was comprehensive and the instructors were great at explaining complex topics. I learned so much and feel confident in my abilities now."</p>
+                        <p>"The DevOps learning platform exceeded my expectations! The vast array of resources, including tutorials, and real-world examples, made the concepts easy to grasp. The progress tracking feature motivated me to keep pushing forward. It's a must-have for anyone serious about DevOps"</p>
                         <p class="testimonial-author">- Alex S.</p>
                     </div>
                 </div>
@@ -158,12 +233,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-container">
+                    <form class="form-container" action="vendor/login.php" method="POST">
                         <div class="form-header">
                             <h2>Login Form</h2>
                         </div>
-                        <input type="text" class="form-input" placeholder="Email">
-                        <input type="password" class="form-input" placeholder="Password">
+                        <input type="text" class="form-input" placeholder="Email" name="email">
+                        <input type="password" class="form-input" placeholder="Password" name="password">
                         <button type="submit" class="form-submit">Login</button>
                         <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#signupModal">Create an account</a>
                     </form>
@@ -185,13 +260,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-container">
+                    <form class="form-container" action="vendor/signup.php" method="POST">
                         <div class="form-header">
                             <h2>Sign Up Form</h2>
                         </div>
-                        <input type="text" class="form-input" placeholder="Name">
-                        <input type="text" class="form-input" placeholder="Email">
-                        <input type="password" class="form-input" placeholder="Password">
+                        <input type="text" class="form-input" placeholder="Name" name="username">
+                        <input type="email" class="form-input" placeholder="Email" name="email">
+                        <input type="password" class="form-input" placeholder="Password" name="password">
                         <button type="submit" class="form-submit">Sign Up</button>
                         <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#loginModal">Already have an account?</a>
                     </form>

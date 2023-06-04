@@ -109,6 +109,58 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    // Add requirement field
+    $('.add-outline').click(function() {
+        var inputHtml = '<div class="outline-input">' +
+            '<div class="form-group">' +
+            '<label for="exampleInputPassword1">Module Title</label>' +
+            '<input type="text" class="form-control" name="module_title[]" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="exampleInputPassword1">Module Content</label>' +
+            '<input type="text" class="form-control" name="module_content[]" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="exampleInputPassword1">Question</label>' +
+            '<input type="text" class="form-control" name="question[]" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="exampleInputPassword1">Option A</label>' +
+            '<input type="text" class="form-control" name="option_a[]" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="exampleInputPassword1">Option B</label>' +
+            '<input type="text" class="form-control" name="option_b[]" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="exampleInputPassword1">Option C</label>' +
+            '<input type="text" class="form-control" name="option_c[]" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="question">Correct Option:</label>' +
+            '<div class="form-check">' +
+            '<input class="form-check-input" type="radio" name="correct_answer_a" id="answer-a" value="a">' +
+            '<label class="form-check-label" for="answer-a">A</label>' +
+            '<input class="form-check-input" type="radio" name="correct_answer_b" id="answer-b" value="b">' +
+            '<label class="form-check-label" for="answer-b">B</label>' +
+            '<input class="form-check-input" type="radio" name="correct_answer_c" id="answer-c" value="c">' +
+            '<label class="form-check-label" for="answer-c">C</label>' +
+            '</div>' +
+            '</div>' +
+            '<button type="button" class="remove-outline btn btn-danger">Remove</button>' +
+            '</div>';
+
+        $('#outlines-container').append(inputHtml);
+    });
+
+    // Remove requirement field
+    $('#outlines-container').on('click', '.remove-outline', function() {
+        $(this).parent('.outline-input').remove();
+    });
+});
+
+
 
 
 

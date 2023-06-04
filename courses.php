@@ -1,5 +1,15 @@
 <?php
+session_start();
+
 require 'vendor/connect.php';
+
+if ($_SESSION) {
+    $user = $_SESSION['user'];
+    $id_user = $user['id'];
+
+    $user_info = mysqli_query($conn, "SELECT * FROM `users` WHERE id_users = '$id_user';");
+    $user_info = mysqli_fetch_all($user_info);
+}
 
 $course_difficulty_levels = mysqli_query($conn, "SELECT * FROM difficulty_level;");
 $course_difficulty_levels = mysqli_fetch_all($course_difficulty_levels);
@@ -45,10 +55,34 @@ $course_tickets = mysqli_fetch_all($course_tickets);
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Courses</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user-table.php">TOP</a>
+                    </li>
                 </ul>
                 <div class="header-buttons">
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                    <?php
+                    if (!$_SESSION) { ?>
+                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
+                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                        <?php
+                    }
+                    else { ?>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?=$user_info[0][1]?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><p class="dropdown-item"><?=$user_info[0][1]?></p></li>
+                                    <li><p class="dropdown-item">My points: <?=$user_info[0][4]?></p></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="vendor/logout.php">Log out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <?php
+                    }
+                    ?>
                 </div>
 
             </div>
@@ -57,6 +91,7 @@ $course_tickets = mysqli_fetch_all($course_tickets);
 
 
     <main class="container task-page">
+        <h1 class="title not-found-js" style="display: none;">There are no tasks for this filter yet</h1>
         <div class="row">
             <section class="col-md-9">
                 <?php
@@ -72,7 +107,16 @@ $course_tickets = mysqli_fetch_all($course_tickets);
                                 <h6 class="card-subtitle mb-2 text-muted">Difficulty level: <span class="task-diff-js"><?=$course_ticket[4]?></span></h6>
                                 <h6 class="card-subtitle mb-2 text-muted">Category: <span class="task-cat-js"><?=$course_ticket[5]?></span></h6>
                                 <br>
-                                <button class="btn btn-primary" type="button" onclick="location.href='course-page.php?id=<?=$course_ticket[0]?>&module=1'">Enroll Now!</button>
+                                <?php
+                                if (!$_SESSION) { ?>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Enroll Now!</button>
+                                    <?php
+                                }
+                                else { ?>
+                                    <button class="btn btn-primary" type="button" onclick="location.href='course-page.php?id=<?=$course_ticket[0]?>&module=1'">Enroll Now!</button>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </article>

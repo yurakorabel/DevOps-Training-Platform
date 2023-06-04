@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!$_SESSION) {
+    header('Location: ../../index.php');
+}
+
 require '../../vendor/connect.php';
 
 $id_task = $_GET['id'];
@@ -57,8 +63,7 @@ $task_steps = mysqli_fetch_all($task_steps);
                 </li>
             </ul>
             <div class="header-buttons">
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                <button class="btn btn-outline-secondary" type="button" onclick="location.href = '../../vendor/logout.php';">Log out</button>
             </div>
         </div>
     </nav>
@@ -171,62 +176,6 @@ $task_steps = mysqli_fetch_all($task_steps);
         </div>
     </div>
 </footer>
-
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Log in</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-container">
-                    <div class="form-header">
-                        <h2>Login Form</h2>
-                    </div>
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
-                    <button type="submit" class="form-submit">Login</button>
-                    <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#signupModal">Create an account</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary log-in-btn">Log in</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Sign up Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="signupModalLabel">Sign up</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-container">
-                    <div class="form-header">
-                        <h2>Sign Up Form</h2>
-                    </div>
-                    <input type="text" class="form-input" placeholder="Name">
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
-                    <button type="submit" class="form-submit">Sign Up</button>
-                    <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#loginModal">Already have an account?</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary log-in-btn">Sign up</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

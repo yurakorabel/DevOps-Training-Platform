@@ -11,21 +11,8 @@ if ($_SESSION) {
     $user_info = mysqli_fetch_all($user_info);
 }
 
-$id_task = $_GET['id'];
-
-$task_ticket = mysqli_query($conn, "SELECT task_title, task_preview_text, task_final_text, level_name, category_name FROM task
-                                        JOIN difficulty_level ON difficulty_level_id_difficulty_level = difficulty_level.id_difficulty_level
-                                        JOIN category ON category_id_category = category.id_category
-                                        WHERE id_task = '$id_task';");
-$task_ticket = mysqli_fetch_all($task_ticket);
-
-$task_requirements = mysqli_query($conn, "SELECT * FROM task_requirements WHERE task_id_task = '$id_task'
-                                                ORDER BY requirement_position;");
-$task_requirements = mysqli_fetch_all($task_requirements);
-
-$task_steps = mysqli_query($conn, "SELECT * FROM task_steps WHERE task_id_task = '$id_task'
-                                            ORDER BY step_position;");
-$task_steps = mysqli_fetch_all($task_steps);
+$users = mysqli_query($conn, "SELECT * FROM `users` WHERE role IS NULL ORDER BY award DESC LIMIT 10;");
+$users = mysqli_fetch_all($users);
 
 ?>
 
@@ -36,7 +23,7 @@ $task_steps = mysqli_fetch_all($task_steps);
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <title>Tasks</title>
+    <title>DevOps Training Platform</title>
 </head>
 <body>
 <header class="bg-white shadow-sm">
@@ -47,21 +34,23 @@ $task_steps = mysqli_fetch_all($task_steps);
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php">Main</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="interesting.php">Interesting</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="tasks.php">Tasks</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="courses.php">Courses</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="user-table.php">TOP</a>
-                </li>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="interesting.php">Interesting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tasks.php">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.php">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">TOP</a>
+                    </li>
+                </ul>
             </ul>
             <div class="header-buttons">
                 <?php
@@ -88,50 +77,35 @@ $task_steps = mysqli_fetch_all($task_steps);
                 }
                 ?>
             </div>
-
         </div>
     </nav>
 </header>
 
 
-<main class="interesting-page container">
-    <div class="container">
-        <h1><?=$task_ticket[0][0]?></h1>
-        <div class="card">
-            <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">Difficulty level: <?=$task_ticket[0][3]?></h6>
-                <h6 class="card-subtitle mb-2 text-muted">Category: <?=$task_ticket[0][4]?></h6>
-                <hr>
-                <p class="card-text">Task: <?=$task_ticket[0][0]?></p>
-                <p class="card-text"><?=$task_ticket[0][1]?></p>
-                <h5 class="mt-4">Requirements:</h5>
-                <ul class="list-group">
-                    <?php
-                    foreach($task_requirements as $task_requirement){
-                        ?>
-                        <li class="list-group-item">- <?=$task_requirement[2]?></li>
-                        <?php
-                    }
-                    ?>
-                </ul>
-                <h5 class="mt-4">Steps:</h5>
-                <ol class="list-group">
-                    <?php
-                    $step_num = 1;
-                    foreach($task_steps as $task_step){
-                        ?>
-                        <li class="list-group-item"><?=$step_num?>. <?=$task_step[2]?></li>
-                        <?php
-                        $step_num++;
-                    }
-                    ?>
-                </ol>
-                <p class="mt-4"><?=$task_ticket[0][2]?></p>
-                <hr>
-                <button class="btn btn-primary" type="button" onclick="location.href='tasks.php'">Turn Back</button>
-            </div>
-        </div>
-    </div>
+<main class="main-page container">
+    <section class="courses">
+        <h2>Top 10 Users</h2>
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Points</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach($users as $user){
+                ?>
+                <tr>
+                    <td><?=$user[1]?></td>
+                    <td><?=$user[4]?></td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>
+        </table>
+    </section>
 </main>
 
 
@@ -148,6 +122,7 @@ $task_steps = mysqli_fetch_all($task_steps);
     </div>
 </footer>
 
+
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -157,12 +132,12 @@ $task_steps = mysqli_fetch_all($task_steps);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-container">
+                <form class="form-container" action="vendor/login.php" method="POST">
                     <div class="form-header">
                         <h2>Login Form</h2>
                     </div>
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
+                    <input type="text" class="form-input" placeholder="Email" name="email">
+                    <input type="password" class="form-input" placeholder="Password" name="password">
                     <button type="submit" class="form-submit">Login</button>
                     <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#signupModal">Create an account</a>
                 </form>
@@ -184,13 +159,13 @@ $task_steps = mysqli_fetch_all($task_steps);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-container">
+                <form class="form-container" action="vendor/signup.php" method="POST">
                     <div class="form-header">
                         <h2>Sign Up Form</h2>
                     </div>
-                    <input type="text" class="form-input" placeholder="Name">
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
+                    <input type="text" class="form-input" placeholder="Name" name="username">
+                    <input type="email" class="form-input" placeholder="Email" name="email">
+                    <input type="password" class="form-input" placeholder="Password" name="password">
                     <button type="submit" class="form-submit">Sign Up</button>
                     <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#loginModal">Already have an account?</a>
                 </form>

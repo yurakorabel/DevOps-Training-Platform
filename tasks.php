@@ -1,5 +1,15 @@
 <?php
+session_start();
+
 require 'vendor/connect.php';
+
+if ($_SESSION) {
+    $user = $_SESSION['user'];
+    $id_user = $user['id'];
+
+    $user_info = mysqli_query($conn, "SELECT * FROM `users` WHERE id_users = '$id_user';");
+    $user_info = mysqli_fetch_all($user_info);
+}
 
 $task_difficulty_levels = mysqli_query($conn, "SELECT * FROM difficulty_level;");
 $task_difficulty_levels = mysqli_fetch_all($task_difficulty_levels);
@@ -45,10 +55,34 @@ $task_tickets = mysqli_fetch_all($task_tickets);
                     <li class="nav-item">
                         <a class="nav-link" href="courses.php">Courses</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user-table.php">TOP</a>
+                    </li>
                 </ul>
                 <div class="header-buttons">
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                    <?php
+                    if (!$_SESSION) { ?>
+                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
+                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                        <?php
+                    }
+                    else { ?>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?=$user_info[0][1]?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><p class="dropdown-item"><?=$user_info[0][1]?></p></li>
+                                    <li><p class="dropdown-item">My points: <?=$user_info[0][4]?></p></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="vendor/logout.php">Log out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
         </nav>

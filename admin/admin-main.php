@@ -1,10 +1,23 @@
+<?php
+session_start();
+require '../vendor/connect.php';
+
+if (!$_SESSION) {
+    header('Location: ../index.php');
+}
+
+$users = mysqli_query($conn, "SELECT * FROM `users` WHERE `role` IS NULL;");
+$users = mysqli_fetch_all($users);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
-    <title>DevOps Training Platform Admin</title>
+    <title>Admin Users</title>
 </head>
 <body>
 <header class="bg-white shadow-sm">
@@ -29,17 +42,45 @@
                 </li>
             </ul>
             <div class="header-buttons">
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</button>
+                <button class="btn btn-outline-secondary" type="button" onclick="location.href = '../vendor/logout.php';">Log out</button>
             </div>
-
         </div>
     </nav>
 </header>
 
 
 <main class="main-page container">
-
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Points</th>
+            <th scope="col">Редагування</th>
+            <th scope="col">Видалення</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach($users as $user){
+            ?>
+            <tr>
+                <th scope="row"><?=$user[0]?></th>
+                <td><?=$user[1]?></td>
+                <td><?=$user[3]?></td>
+                <td><?=$user[4]?></td>
+                <td><a href="admin-user/update-user.php?id=<?=$user[0]?>">Update</a></td>
+                <td><a href="admin-user/deleting-user.php?id=<?=$user[0]?>">Delete</a></td>
+            </tr>
+            <?php
+        }
+        ?>
+        </tbody>
+    </table>
+    <article class="card">
+        <button class="create-task btn btn-success" style="width: 100%;" onclick="location.href='admin-user/create-user.php'">CREATE</button>
+    </article>
 </main>
 
 
@@ -55,62 +96,6 @@
         </div>
     </div>
 </footer>
-
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Log in</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-container">
-                    <div class="form-header">
-                        <h2>Login Form</h2>
-                    </div>
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
-                    <button type="submit" class="form-submit">Login</button>
-                    <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#signupModal">Create an account</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary log-in-btn">Log in</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Sign up Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="signupModalLabel">Sign up</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="form-container">
-                    <div class="form-header">
-                        <h2>Sign Up Form</h2>
-                    </div>
-                    <input type="text" class="form-input" placeholder="Name">
-                    <input type="text" class="form-input" placeholder="Email">
-                    <input type="password" class="form-input" placeholder="Password">
-                    <button type="submit" class="form-submit">Sign Up</button>
-                    <a href="#" class="form-link" data-bs-toggle="modal" data-bs-target="#loginModal">Already have an account?</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary log-in-btn">Sign up</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!-- Bootstrap JavaScript -->
